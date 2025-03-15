@@ -1,0 +1,234 @@
+{% extends "college_web_app/base.html" %}
+{% block title %}Home Page{% endblock title %}
+
+{% block content %}
+
+
+{% include "college_web_app/navbar.html" %}
+{% load static %}
+
+
+   
+      <style>
+        .carousel-item img {
+            height: 400px;
+            object-fit: cover;
+        }   
+            
+            #heroCarousel {
+                max-height: 500px; /* Adjust the height as needed */
+            }
+        
+            .carousel-inner {
+                max-height: 500px;
+            }
+        
+            .carousel-item img {
+                object-fit: contain; /* Ensures the full image is visible */
+                width: 100%;
+                height: 500px; /* Match the carousel height */
+            }
+        
+            .carousel-caption {
+                background: rgba(255, 255, 255, 0.7); /* Light background for text visibility */
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+            .banner_bg{
+                background-color :rgb(255, 135, 36);
+            }
+
+            .container {
+                max-width: 85%;
+            }
+            .border-warning {
+                border-width: 3px !important;
+            }
+            .border-primary {
+                border-width: 2px !important;
+            }
+
+
+            .section-card {
+                min-height: 300px; /* Adjust as needed */
+                display: flex;
+                flex-direction: column;
+                justify-content: center; /* Centers content */
+                text-align: center;
+                border: 2px solid #0d6efd; /* Blue border */
+                border-radius: 10px;
+                padding: 20px;
+                background-color: white; /* Ensure a clean look */
+            }
+
+
+            .row {
+                display: flex;
+            }
+
+            
+            {% comment %} .img_border{
+                border: 5px solid #000; /* Adds a black border around images */
+                border-radius: 10px; 
+            } {% endcomment %}
+    </style>
+  
+    <!-- Bootstrap Carousel as Background -->
+   
+
+
+<div id="heroCarousel" class="carousel slide banner_bg" data-bs-ride="carousel" data-bs-interval="2000">
+    <div class="carousel-inner">
+        {% for image in carousel_images %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <img src="{{ image.image.url }}" class="d-block w-100 img_border" alt="Slide {{ forloop.counter }}">
+            {% if image.caption %}
+            <div class="carousel-caption d-none d-md-block text-dark">
+                <p>{{ image.caption }}</p>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+    <!-- Two Boxes Below Carousel -->
+    {% comment %} <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card p-4 shadow">
+                    <h3>Message</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure blanditiis mollitia distinctio itaque. Consequatur voluptate obcaecati soluta optio deserunt. Sapiente ipsum odio earum consequatur, neque est ea corporis ducimus, ut itaque consectetur a! Incidunt illum recusandae molestiae exercitationem blanditiis magni! Nisi architecto amet quibusdam et, tenetur odit quam quo totam ullam dolore. Saepe optio odio doloribus temporibus, molestias cum libero autem. Sequi rem dolorem cupiditate veritatis sunt, ipsam neque, optio corporis quos doloremque quas officiis dolor? Veritatis architecto alias sit praesentium repellendus id ducimus, facilis quasi eum fugiat dolorem perspiciatis autem consequatur modi aut odit voluptatibus porro dolorum voluptatem quia. Repudiandae dignissimos eligendi accusantium. Excepturi dignissimos voluptatibus labore mollitia pariatur blanditiis maxime vel fugit? Sed possimus dolor tempora? Sit quidem fugiat, nam temporibus, qui nesciunt quas nobis distinctio dolorum, exercitationem porro laboriosam? Earum ut itaque dignissimos nostrum praesentium accusamus possimus vero. Odio vero sit qui, tempora quam amet provident reiciendis odit accusamus explicabo corrupti impedit debitis quasi. Vel voluptatibus dolor, excepturi tempora ullam dolorem? Aperiam, deleniti suscipit officia unde corrupti laborum necessitatibus ea temporibus magnam perferendis culpa voluptatem dolores, quo quasi quod maiores sapiente officiis corporis ducimus illo esse, ipsam placeat at. Labore nihil et dolore tempore! Ab odit unde possimus architecto suscipit distinctio tempora ratione sit mollitia nesciunt numquam, porro sint doloremque natus assumenda iure quas animi, aperiam ipsa aliquam quibusdam laboriosam. Eos neque cupiditate obcaecati assumenda suscipit mollitia ea laudantium velit at tempore, vero sed voluptate minima deleniti! Recusandae aspernatur ipsa facilis ipsum adipisci reiciendis, eveniet perferendis laboriosam.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-4 shadow">
+                    <h3>About GP Kotdwara</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam inventore perferendis asperiores perspiciatis molestiae quidem facilis saepe temporibus officia! Facilis laudantium ab aliquid, labore cupiditate suscipit eaque explicabo facere id ut distinctio! Fugiat, velit vel sunt aut sapiente odio at eveniet provident nemo, reiciendis esse ea, enim assumenda ut veniam temporibus inventore soluta? Possimus consequatur vero explicabo aliquam doloremque error eum reprehenderit! Unde ex quidem explicabo autem dolore saepe dolores quisquam, expedita eum eos obcaecati fugiat accusantium suscipit perspiciatis. Accusantium voluptatibus sapiente exercitationem, tenetur labore veritatis harum eveniet quae ex qui quas sequi laboriosam sint magni natus ipsam nisi, fugiat soluta commodi blanditiis pariatur quibusdam possimus obcaecati! Laudantium adipisci facilis, officia asperiores quaerat dolor sapiente impedit doloribus exercitationem accusantium atque. Provident laudantium accusamus, temporibus qui sunt omnis, eius nemo, dicta vero laborum quam id iure vel dolore quaerat quidem molestias veniam enim harum minima quibusdam cupiditate. Atque, in! Alias animi delectus tempore ullam, blanditiis illum repellat vero facere dolores sequi velit, dolorem cupiditate laudantium? Molestias soluta velit voluptates numquam distinctio fugit possimus suscipit dicta dolore debitis error magni necessitatibus, quod quasi cupiditate libero commodi quae impedit tenetur totam corrupti vel voluptatibus optio! Quaerat tempora cum sequi deleniti consequatur sapiente quo tempore corporis beatae laudantium possimus dolorum odit asperiores quibusdam eius, vel doloremque praesentium voluptate. Placeat odio amet molestiae est voluptas, aperiam ipsa officiis doloremque, ut, quos molestias. Facere assumenda dignissimos amet impedit nisi labore dolor earum. Eius assumenda impedit nulla. Fuga, illum quae molestiae ullam harum reprehenderit possimus quibusdam tenetur!</p>
+                </div>
+            </div>
+        </div>
+    </div> {% endcomment %}
+    {% comment %} <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card p-4 shadow">
+                    <h3>Message</h3>
+                    <p>{{ message.content|safe }}</p>  {# Display rich text content #}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-4 shadow">
+                    <h3>About GP Kotdwara</h3>
+                    <p>{{ about.content|safe }}</p>  {# Display rich text content #}
+                </div>
+            </div>
+        </div>
+    </div> {% endcomment %}
+    <div class="container my-5">
+        <div class="row d-flex align-items-stretch">
+            <div class="col-md-6">
+                <div class="card p-4 shadow h-100 d-flex flex-column">
+                    <h3>Message</h3>
+                    <div class="flex-grow-1">
+                        {% if message %}
+                            {{ message.content|safe }}
+                        {% else %}
+                            <p>No message available.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-4 shadow h-100 d-flex flex-column">
+                    <h3>About GP Kotdwara</h3>
+                    <div class="flex-grow-1">
+                        {% if about %}
+                            {{ about.content|safe }}
+                        {% else %}
+                            <p>No information available.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    {% comment %} FEATURE SECTION STARTING {% endcomment %}
+
+    <section class="container my-5">
+        <h2 class="mb-4">Featured</h2>
+        <div class="row">
+            {% for feature in features %}
+            <div class="col-md-4 d-flex align-items-stretch"> 
+                <div class="card shadow-lg border-0 w-100">
+                    <img src="{{ feature.image.url }}" class="card-img-top img-fluid mt-4" alt="{{ feature.title }}" 
+                         style="height: 300px; object-fit: contain;">  <!-- Increased height -->
+                    <div class="card-body d-flex flex-column p-4">  <!-- Added padding -->
+                        <h4 class="card-title text-center">{{ feature.title }}</h4>  <!-- Bigger title -->
+                        <div class="mt-auto">
+                            <a href="{{ feature.pdf_file.url }}" target="_blank" class="btn btn-md btn-primary w-100">
+                                View PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>No featured publications available.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    
+    {% comment %} FEATURE SECTION ENDING {% endcomment %}
+
+    {% include "file_storing_app/notices.html" %}
+
+    {% include "college_web_app/campus_life.html" %}
+
+    <div class="container my-5">
+        <div class="row d-flex justify-content-center">
+            {% for section in sections %}
+            <div class="col-md-4">
+                <div class="card section-card h-100">
+                    <div class="card-body text-center">
+                        <h2 class="card-title text-primary">{{ section.title }}</h2>
+                        <p class="card-text">{{ section.content }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% comment %} {% include "college_web_app/gallery.html" %} {% endcomment %}
+
+    
+    {% comment %} FOOTER START {% endcomment %}
+
+    
+    <footer class="bg-dark text-light text-center py-3 mt-4">
+        <p class="mb-0">
+            Copyright © 2015 - 2025 | Government Polytechnic Kotdwar, Pauri Garhwal, Uttarakhand
+        </p>
+       
+    </footer>
+    
+
+    {% comment %} FOOTER ENDING {% endcomment %}
+   
+   {% endblock content %}
+
+ 

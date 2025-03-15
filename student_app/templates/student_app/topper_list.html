@@ -1,0 +1,71 @@
+{% extends "college_web_app/base.html" %}
+
+{% block content %}
+{% include "college_web_app/navbar.html" %}
+
+{% load static %}
+<div class="container mt-4">
+    <h2 class="mb-3 text-primary">Topper List</h2>
+
+    <!-- Filter Form -->
+    <form method="GET" class="mb-4">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label for="course" class="form-label">Select Course:</label>
+                <select class="form-select" name="course" id="course">
+                    <option value="">-- All Courses --</option>
+                    {% for course in courses %}
+                        <option value="{{ course.id }}" {% if selected_course_id == course.id|stringformat:"s" %}selected{% endif %}>
+                            {{ course.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md-4">
+                <label for="year" class="form-label">Select Year:</label>
+                <select class="form-select" name="year" id="year">
+                    <option value="">-- All Years --</option>
+                    {% for y in years %}
+                        <option value="{{ y }}" {% if selected_year == y %}selected{% endif %}>
+                            {{ y }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">Filter</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Tables for Each Course -->
+    {% for course, toppers in toppers_by_course.items %}
+        <h3 class="mt-4 text-success">{{ course.name }}</h3>
+        <table class="table table-bordered text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Year</th>
+                    <th>Marks Obtained</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for topper in toppers %}
+                    <tr>
+                        <td>{{ topper.name }}</td>
+                        <td>{{ topper.year }}</td>
+                        <td>{{ topper.marks_obtained }}</td>
+                        <td>{{ topper.percentage }}%</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% empty %}
+        <p class="text-danger">No toppers found.</p>
+    {% endfor %}
+
+</div>
+{% endblock content %}

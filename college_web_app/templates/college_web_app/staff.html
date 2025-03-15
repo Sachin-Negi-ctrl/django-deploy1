@@ -1,0 +1,50 @@
+{% extends "college_web_app/base.html" %}
+{% block title %}Staff Page{% endblock title %}
+{% block content %}
+{% include "college_web_app/navbar.html" %}
+{% load static %}
+    <style>
+        
+        .staff-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .staff-card {
+            text-align: left;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+        .staff-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #dc3545;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="text-center text-danger mt-4">STAFF MEMBERS</h2>
+        <div class="row justify-content-center">
+            {% for staff in staff_members %}
+            <div class="col-md-4 col-sm-6 mb-4 mt-4">
+                <div class="staff-card text-center">
+                    <img src="{% if staff.image %}{{ staff.image.url }}{% else %}{% static 'images/default/staff.jpg' %}{% endif %}" 
+                    alt="Staff Image" class="staff-img">
+                    <p><strong>Name:</strong> {{ staff.name }}</p>
+                    <p><strong>Designation:</strong> {{ staff.designation }}</p>
+                    <p><strong>Qualification:</strong> {{ staff.qualification }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center text-muted">No staff members found.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock content %}

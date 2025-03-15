@@ -1,0 +1,63 @@
+{% extends "college_web_app/base.html" %} 
+
+
+{% block content %}
+{% include "college_web_app/navbar.html" %}
+
+    <div class="container table-container mt-5">
+      {% for c in courses %}
+        
+       
+        <h4 class="course-header">{{ c.name|upper }}</h4>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>Name of the Programme</th>
+                    <td>{{ c.name }}</td>
+                </tr>
+                <tr>
+                    <th>Duration of the Programme</th>
+                    <td>{{ c.duration }}</td>
+                </tr>
+                <tr>
+                    <th>Entry Qualification</th>
+                    <td>{{ c.entry_qualification }}</td>
+                </tr>
+                <tr>
+                    <th>Intake</th>
+                    <td>{{ c.intake }}</td>
+                </tr>
+                <tr>
+                    <th>Pattern of the Programme</th>
+                    <td>{{ c.program_pattern }}</td>
+                </tr>
+                <tr>
+                    <th>Ratio between Theory and Practical Classes</th>
+                    <td>{{ c.theory_practical_ratio }}</td>
+                </tr>
+                <tr>
+                    <th>Ecology and Environment</th>
+                    <td>{{ c.ecology_environment }}</td>
+                </tr>
+                <tr>
+                    <th>Entrepreneurship Development</th>
+                    <td>{{ c.entrepreneurship_development }}</td>
+                </tr>
+                <tr>
+                    <th>Industrial Exposure</th>
+                    <td>{{ c.industrial_exposure }}</td>
+                </tr>
+                <tr>
+                    <th>Discipline</th>
+                    <td>{{ c.discipline }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr class="mt-5" style="color:red;">
+        {% endfor %}
+    </div>
+    
+   
+
+
+{% endblock content %}

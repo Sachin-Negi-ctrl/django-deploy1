@@ -1,0 +1,67 @@
+{% extends 'college_web_app/base.html' %}
+{% block content %}
+{% include "college_web_app/navbar.html" %}
+
+<div class="container mt-5">
+    <h2 class="text-success">Facilities</h2>
+    <hr>
+    <div class="row">
+        {% for facility in facilities %}
+        <div class="col-md-12">
+            <h3 class="text-primary">{{ facility.title }}</h3>
+            <p>{{ facility.description|safe }}</p>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <a href="{{ facility.image1.url }}" data-bs-toggle="modal" data-bs-target="#imageModal{{ facility.id }}1">
+                        <img src="{{ facility.image1.url }}" class="img-fluid rounded border p-2 w-100 bg-light" alt="Facility Image 1">
+                    </a>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <a href="{{ facility.image2.url }}" data-bs-toggle="modal" data-bs-target="#imageModal{{ facility.id }}2">
+                        <img src="{{ facility.image2.url }}" class="img-fluid rounded border p-2 w-100 bg-light" alt="Facility Image 2">
+                    </a>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <a href="{{ facility.image3.url }}" data-bs-toggle="modal" data-bs-target="#imageModal{{ facility.id }}3">
+                        <img src="{{ facility.image3.url }}" class="img-fluid rounded border p-2 w-100 bg-light" alt="Facility Image 3">
+                    </a>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <a href="{{ facility.image4.url }}" data-bs-toggle="modal" data-bs-target="#imageModal{{ facility.id }}4">
+                        <img src="{{ facility.image4.url }}" class="img-fluid rounded border p-2 w-100 bg-light" alt="Facility Image 4">
+                    </a>
+                </div>
+            </div>
+            <hr>
+        </div>
+
+        <!-- Bootstrap Modals for Full-Size Images -->
+        {% for i in "1234" %}
+        <div class="modal fade" id="imageModal{{ facility.id }}{{ i }}" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ facility.title }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        {% if i == "1" %}
+                            <img src="{{ facility.image1.url }}" class="img-fluid rounded" alt="Facility Image 1">
+                        {% elif i == "2" %}
+                            <img src="{{ facility.image2.url }}" class="img-fluid rounded" alt="Facility Image 2">
+                        {% elif i == "3" %}
+                            <img src="{{ facility.image3.url }}" class="img-fluid rounded" alt="Facility Image 3">
+                        {% elif i == "4" %}
+                            <img src="{{ facility.image4.url }}" class="img-fluid rounded" alt="Facility Image 4">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

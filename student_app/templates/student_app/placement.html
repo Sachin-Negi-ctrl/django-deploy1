@@ -1,0 +1,55 @@
+{% extends "college_web_app/base.html" %}
+
+{% block title %}Placement Page{% endblock title %}
+
+{% block content %}
+{% include "college_web_app/navbar.html" %}
+
+<body>
+    <div class="container mt-4">
+        <h2 class="text-center">Placement Records</h2>
+
+        <!-- Year Filter Dropdown -->
+        <form method="GET" action="{% url 'placement_records' %}" class="text-end mb-3">
+            <label for="year">Filter by Year:</label>
+            <select name="year" id="year" class="form-select d-inline-block w-auto" onchange="this.form.submit()">
+                <option value="">All Years</option>
+                {% for year in years %}
+                    <option value="{{ year }}" {% if year|stringformat:"s" == selected_year %}selected{% endif %}>
+                        {{ year }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+
+        <!-- Placement Table -->
+        <table class="table table-bordered">
+            <thead class="table-success">
+                <tr>
+                    <th>S. No.</th>
+                    <th>Candidate Name</th>
+                    <th>Branch</th>
+                    <th>Company</th>
+                    <th>Package (LPA)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ record.candidate_name }}</td>
+                    <td>{{ record.branch }}</td>
+                    <td>{{ record.company_name }}</td>
+                    <td>{{ record.package }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">No records found for the selected year.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock content %}

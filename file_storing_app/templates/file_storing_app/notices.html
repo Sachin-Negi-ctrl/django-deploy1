@@ -1,0 +1,52 @@
+{% extends "college_web_app/base.html" %}
+
+{% block content %}
+
+{% if request.path != '/' %}
+    {% include "college_web_app/navbar.html" %}
+{% endif %}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Notice Board</h2>
+
+    <!-- Notice Board Container with Scrolling Effect -->
+    <div class="notice-board border rounded p-3 shadow">
+        <ul class="list-group">
+            {% for notice in notices %}
+                <li class="list-group-item bg-danger  mt-1  border-rounded">
+                    <a href="{{ notice.pdf_file.url }}" class="text-light  text-decoration-none fw-bold" target="_blank">
+                        {{ notice.title }}
+                        |
+                        {{ notice.description }}
+                    </a>
+                </li>
+            {% empty %}
+                <li class="list-group-item text-danger">No notices available</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<!-- Custom CSS -->
+<style>
+    .notice-board {
+        height: 300px; /* Fixed height for the notice board */
+        overflow-y: auto; /* Enables vertical scrolling if content overflows */
+        background-color: #f8f9fa; /* Light gray background */
+    }
+
+    .notice-board::-webkit-scrollbar {
+        width: 8px; /* Customize scrollbar width */
+    }
+
+    .notice-board::-webkit-scrollbar-thumb {
+        background: #888; /* Scrollbar color */
+        border-radius: 4px;
+    }
+
+    .notice-board::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+</style>
+
+{% endblock content %}

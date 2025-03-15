@@ -1,0 +1,12 @@
+{% extends 'college_web_app/base.html' %}
+{% block content %}
+{% include "college_web_app/navbar.html" %}
+<div class="container mt-4">
+    <h2 class="mb-4">Alumni Registration</h2>
+    <form method="POST" class="card p-4 shadow">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+{% endblock %}

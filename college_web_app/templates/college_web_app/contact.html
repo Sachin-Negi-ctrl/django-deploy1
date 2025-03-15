@@ -1,0 +1,16 @@
+{% extends "college_web_app/base.html" %}
+{% block content %}
+{% include "college_web_app/navbar.html" %}
+<div class="container mt-5">
+    <h2 class="text-center">Contact Us</h2>
+    <div class="card shadow-lg p-4">
+        <div class="card-body">
+            {% if contact_info %}
+                <div>{{ contact_info.description|safe }}</div>
+            {% else %}
+                <p>No contact information available.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

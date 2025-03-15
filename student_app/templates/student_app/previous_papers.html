@@ -1,0 +1,100 @@
+{% extends "college_web_app/base.html" %}
+
+{% block content %}
+
+{% include "college_web_app/navbar.html" %}
+
+<div class="container mt-4">
+    <h2 class="text-primary">Previous Year Papers</h2>
+
+    <!-- Filter Form -->
+    <form method="GET" class="mb-4">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <label for="course" class="form-label">Select Course:</label>
+                <select class="form-select" name="course" id="course">
+                    <option value="">-- All Courses --</option>
+                    {% for course in courses %}
+                        <option value="{{ course.id }}" {% if selected_course == course.id|stringformat:"s" %}selected{% endif %}>
+                            {{ course.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label for="year" class="form-label">Select Year:</label>
+                <select class="form-select" name="year" id="year">
+                    <option value="">-- All Years --</option>
+                    {% for paper in papers %}
+                        <option value="{{ paper.year }}" {% if selected_year == paper.year %}selected{% endif %}>
+                            {{ paper.year }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+             <div class="col-md-2">
+                <label for="semester" class="form-label">Select Semester:</label>
+                
+                  <select class="form-select" name="semester" id="semester">
+                <option value="">-- All Semesters --</option>
+                {% for sem_num, sem_text in semester_choices %}
+                    <option value="{{ sem_num }}" {% if selected_semester == sem_num %}selected{% endif %}>
+                        {{ sem_text }}
+                    </option>
+                {% endfor %}
+            </select>
+         </div> 
+
+
+            <div class="col-md-3">
+                <label for="subject" class="form-label">Select Subject:</label>
+                <select class="form-select" name="subject" id="subject">
+                    <option value="">-- All Subjects --</option>
+                    {% for subject in subjects %}
+                        <option value="{{ subject.id }}" {% if selected_subject == subject.id|stringformat:"s" %}selected{% endif %}>
+                            {{ subject.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">Filter</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Table Displaying Previous Papers -->
+    <table class="table table-bordered text-center">
+        <thead class="table-dark">
+            <tr>
+                <th>Title</th>
+                <th>Course</th>
+                <th>Semester</th>
+                <th>Subject</th>
+                <th>Year</th>
+                <th>Download</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for paper in papers %}
+                <tr>
+                    <td>{{ paper.title }}</td>
+                    <td>{{ paper.course.name }}</td>
+                    <td>Semester {{ paper.get_semester_display }}</td>
+                    <td>{{ paper.subject.name }}</td>
+                    <td>{{ paper.year }}</td>
+                    <td><a href="{{ paper.pdf_file.url }}" class="btn btn-success btn-sm" target="_blank">View/Download</a></td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6" class="text-danger">No records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

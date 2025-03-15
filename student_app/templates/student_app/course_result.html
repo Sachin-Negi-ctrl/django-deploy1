@@ -1,0 +1,63 @@
+{% extends "college_web_app/base.html" %} 
+
+{% block content %}
+
+{% include "college_web_app/navbar.html" %}
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid black;
+        text-align: center;
+        padding: 8px;
+    }
+    th {
+        background-color: #f8f9fa;
+    }
+    td.course-name {
+        font-weight: bold;
+        text-align: left;
+        padding-left: 15px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container mt-4">
+<h2 class="text-center mb-4">Course Results</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>COURSE NAME</th>
+            <th>SESSION</th>
+            <th>ENROLLED STUDENTS</th>
+            <th>PASSED STUDENTS</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for course, results in courses.items %}
+            <tr>
+                <!-- rowspan dynamically calculated -->
+                <td class="course-name" rowspan="{{ results|length }}"><strong>{{ course.name }}</strong></td>
+                <!-- Display first row of the course -->
+                <td>{{ results.0.session }}</td>
+                <td>{{ results.0.enrolled_students }}</td>
+                <td>{{ results.0.passed_students }}</td>
+            </tr>
+            <!-- Loop through remaining rows -->
+            {% for result in results|slice:"1:" %}
+            <tr>
+                <td>{{ result.session }}</td>
+                <td>{{ result.enrolled_students }}</td>
+                <td>{{ result.passed_students }}</td>
+            </tr>
+            {% endfor %}
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock content %}

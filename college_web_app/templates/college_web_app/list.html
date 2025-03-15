@@ -1,0 +1,34 @@
+{% extends 'college_web_app/base.html' %}
+{% block content %}
+{% include "college_web_app/navbar.html" %}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Alumni Members</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Course</th>
+                <th>Passing Year</th>
+                <th>Company</th>
+                <th>Designation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for alumni in alumni_members %}
+            <tr>
+                <td>{{ alumni.name }}</td>
+                <td>{{ alumni.course.name }}</td>
+                <td>{{ alumni.passing_year }}</td>
+                <td>{{ alumni.company }}</td>
+                <td>{{ alumni.designation }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No alumni registered yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
